@@ -1,0 +1,207 @@
+th {
+    background-color: rgb(44, 224, 44);
+    padding: 0.5rem;
+}
+td {
+    background-color: aqua;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+.animal-image {
+    margin: auto;
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+}
+
+.animal-container {
+    display: block;
+    text-align: center;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    width: 6rem;
+    background-color: antiquewhite;
+}
+
+.member-image {
+    margin: auto;
+}
+
+.member-container {
+    width: 6rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(194, 237, 194, 0.516);
+    margin-top: 1rem;
+}
+
+.member-name {
+    text-align: center;
+    font-size: 16px;
+}
+
+.level-text {
+    font-size: 4px;
+}
+
+.level-int {
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.ranking-table {
+    max-width: 3/4;
+    margin: 5% auto;
+}
+
+.table-title {
+    color: white;
+    border-right: 1px solid;
+    border-color: white;
+}
+
+.table-data {
+    color: black;
+    background-color: aqua;
+    font-size: 16px;
+}
+
+body {
+    font-family: "Yusei Magic", sans-serif;
+}
+
+
+
+.modal{
+    width: 70%;
+    height: 70%;
+    position: fixed;
+    inset:0;
+    z-index:9999;
+    top:20%;
+    left:15%;
+    background-color: white;
+    border: 2px solid green;
+    border-radius: 10px;
+    text-align: center;
+    opacity:1;
+}
+
+
+@media screen and (min-width: 768px) {
+    table {
+        width: 75%;
+    }
+    th {
+        font-size: 30px;
+    }
+    td {
+        font-size: 30px;
+    }
+    img {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .member-container {
+        position:relative;
+        width: 12rem;
+        padding: 1rem;
+    }
+
+    .animal-container {
+        width: 12rem;
+        padding: 1rem;
+    }
+
+    .animal-image {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    .level-text {
+        font-size: 16px;
+    }
+    .level-int {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .member-name {
+        font-size: 20px;
+    }
+
+    .member-image {
+        width: 120px;
+        height: 100px;
+        object-fit: cover;
+    }
+}
+
+.hover-message {
+    position: relative;
+    cursor: pointer;
+}
+
+.hover-message:hover::after {
+    content: attr(data-tooltip); /* 属性値からメッセージを取得 */
+    position: absolute;
+    bottom: 50%;
+    left: 80%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.fade {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.fade-level {
+    animation: fadeIn 2.0s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.current-user-indicator{
+    max-width: 100%;
+    height: 20%;
+    font-size: 8px;
+    position:absolute;
+    border-radius: 10rem;
+    padding:2px 4px 2px 4px;
+    color: white;
+    background-color: rgb(73, 177, 17);
+    right: -5%;
+    top: -5%;
+    display: inline-block; /* 必須 */
+     animation: shake 0.6s infinite; /* 0.3秒で無限ループ */
+
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(1px, 1px) rotate(2deg); }
+  50% { transform: translate(0, 0) rotate(0deg); }
+  75% { transform: translate(-1px, -1px) rotate(-2deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
