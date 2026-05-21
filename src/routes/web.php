@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function(){
     })->name('profile');
 });
 
+Route::get('/history', [UserController::class, 'showHistory'])->name('history.show');
+Route::post('/history', [UserController::class, 'storeLike'])->name('like.store');
+
     Route::get('/admin.login',function(){ return view('admin/login');});
     Route::post('/admin.login',[AdminController::class,'adminLogin'])->name('admin.login');
 // adminルート
@@ -34,6 +37,8 @@ Route::middleware('auth')->group(function(){
     Route::post('/member/register',[AdminController::class,'storeUser'])->name('register.store');
     Route::get('/practiceJadge',[AdminController::class,'showTest'])->name('practiceJadge.show');
     Route::post('/practiceJadge',[AdminController::class,'storeHistory'])->name('practiceJadge.store');
+    Route::post('/practiceJadge/decrease',[AdminController::class,'decreaseHistory'])->name('practiceJadge.decrease');
+    Route::post('/practiceJadge/fail',[AdminController::class,'failChallenge'])->name('practiceJadge.fail');
 
 Route::get('/delete',[AdminController::class,'showDelete'])->name('delete.show');
 Route::post('/delete/{id}',[AdminController::class,'delete'])->name('delete');

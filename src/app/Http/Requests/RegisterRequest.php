@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'login_id' =>['string','min:4','required','unique:users,login_id'],
-            'name'=>['string','min:1','max:6','required','unique:users,name'],
+            'name'=>['string','min:1','max:10','required','unique:users,name'],
             'password' =>['string','min:6','required','confirmed'],
             'member_avatar_id'=>['integer','required']
         ];
@@ -41,7 +41,7 @@ class RegisterRequest extends FormRequest
             'name.unique' =>'既に使われているなまえです',
             'name.string' => 'なまえは文字列で入力してください',
             'name.required' => 'なまえは入力必須です',
-            'name.max' => 'なまえは6文字以内にしてください',
+            'name.max' => 'なまえは10文字以内にしてください',
             'name.min'=>'なまえは最低でも1文字以上にしてください',
             'password.string'=>'パスワードは文字列で入力してください',
             'password.min' => 'パスワードは6文字以上にしてください',

@@ -15,7 +15,7 @@
         <form action="{{ route('register.store')}}" method="POST">
             @csrf
             <div class="w-1/2 md:w-1\/3 mx-auto m-10">
-                <p class="text-sm">※新規登録するメンバーの初回IDとパスワードを入力してください</p>
+                <p class="text-xs">※新規登録するメンバーの初回IDとパスワードを入力してください</p>
                 <label >ID
                 <input type="text" name="login_id" value="{{old('login_id','U-')}}" class="h-10 border border-black w-full rounded-full mb-8 p-4"></label>
                 <label>ニックネーム
@@ -26,13 +26,13 @@
                 <input type="password" name="password_confirmation" class="h-10 border border-black w-full rounded-full mb-8 p-4">
                 </label>
                     <div class="flex my-12 items-center">
-                    <img src="{{ asset('images/dafault.png')}}" alt="select you avatar" class="w-24 h-20 md:w-48 md:h-36 mx-auto object-cover" id="avatarPreview">
+                    <img src="{{ asset('images/default.png')}}" alt="select you avatar" class="w-20 h-20 md:w-36 md:h-36 mx-auto object-cover" id="avatarPreview">
                     <input type="hidden" id="selectedAvatarId" name="member_avatar_id" value="">
-                <button id="changeButton" type="button" class="text-center btn-primary m-4 h-12 p-2">キャラクターを選ぶ</button>
+                <button id="changeButton" type="button" class="text-center btn-primary m-2 p-2">キャラクターを選ぶ</button>
                 </div>
                 <div class="text-center">
-                <button type="submit" class="btn-primary rounded-full text-center px-8 mx-8">登録する</button>
-                <button class="btn-outline rounded-full text-center px-8 mx-8">
+                <button type="submit" class="btn-primary rounded-full text-center px-8 m-4">登録する</button>
+                <button class="btn-outline rounded-full text-center px-4 m-4">
                     <a href="{{ route('admin.index') }}">トップに戻る</a>
                 </button>
                 </div>

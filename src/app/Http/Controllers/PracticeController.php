@@ -70,7 +70,9 @@ class PracticeController extends Controller
     // 5.rankingにuserのデータを表示する
     public function showRanking(){
         $animals = Animal::all();
-        $users = User::with('avatar','histories.practice')->get();
+        $users = User::with('avatar','histories.practice')
+        ->withcount('likes')
+        ->get();
 
         foreach($users as $user){
             $history = $user->histories
@@ -85,6 +87,6 @@ class PracticeController extends Controller
                 && $user->current_level <=$animal->max_level;
             });
         }
-        return view('ranking',compact('users'));
+        return view('ranking',compact('users','receivedLikes'));
     }
 }

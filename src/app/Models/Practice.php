@@ -23,4 +23,14 @@ class Practice extends Model
         return $this->hasMany(Animal::class);
     }
 
+    public function users(){
+        return $this->belongsToMany(User::class,'histories')
+        ->withPivot('is_passed')
+        ->withTimestamps();
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
 }

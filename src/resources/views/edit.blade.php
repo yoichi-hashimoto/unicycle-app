@@ -3,9 +3,6 @@
 @section('content')
 <main class="pt-20"> 
 
-<form action="{{route('profile.update')}}" method="POST" class="w-full">
-@csrf
-@method('PATCH')
 <div class="w-96 my-12 m-auto text-center">
     
 <h1 class="text-3xl">プロフィール変更画面</h1>
@@ -18,6 +15,10 @@
         </ul>
     </div>
 @endif
+<form action="{{route('profile.update')}}" method="POST" class="w-full">
+@csrf
+@method('PATCH')
+
 <img src="{{ ($userData->avatar->avatar_path)}}" alt="" class="w-24 h-20 md:w-48 md:h-36 mx-auto my-12 object-cover" id="avatarPreview">
 <input type="hidden" id="selectedAvatarId" name="member_avatar_id" value="{{ $userData->avatar_id }}">
 <button id="changeButton" type="button" class="text-center btn-primary">キャラクターを変更する</button>
@@ -52,9 +53,18 @@ const closeModals = document.querySelectorAll('.closeButton')
 const selectAvatar = document.querySelectorAll('.avatarOption');
 const avatarPreview = document.getElementById('avatarPreview');
 const selectedAvatarIdInput = document.getElementById('selectedAvatarId');
+const form = document.querySelector("form");
+
+const originalAvatarId = selectedAvatarIdInput.value;
 
 openModal.addEventListener("click",()=>{
     avatarsModal.classList.remove("hidden");
+});
+
+closeModals.forEach(button => {
+    button.addEventListener("click", () => {
+        avatarsModal.classList.add("hidden");
+    });
 });
 
 selectAvatar.forEach(avatar => {
@@ -66,6 +76,11 @@ selectAvatar.forEach(avatar => {
         avatarsModal.classList.add("hidden");
     });
 });
+
+    form.addEventListener("submit", () => {
+        if(selectedAvatarIdInput.value){
+         selectedAvatarIdInput.value = originalAvatarId;}
+    });
 
 </script>
 

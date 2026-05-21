@@ -8,27 +8,26 @@
     @auth
         <div class="w-full text-center my-3">
             <a href="/profile" class="hover-message" data-tooltip="自分のプロフィールを表示・編集します">
-                <button class="btn-primary rounded-full w-1/2 h-18 md:h-24 text-xl md:text-3xl">プロフィール</button>
+                <button class="btn-primary rounded-full w-2/3 h-18 md:h-24 text-xl md:text-3xl">プロフィール</button>
             </a>
         </div>
     @endauth
         <div class="flex flex-col h-full">
             <div class="w-full text-center my-3">
-                <a href="/ranking" class="hover-message" data-tooltip="メンバー全員のランキングを表示します">
-                    <button class="btn-primary rounded-full w-1/2 h-18 md:h-24 text-xl md:text-3xl">ランキング</button>
+                <a href="/history" class="hover-message" data-tooltip="メンバー全員のチャレンジ履歴を表示します">
+                    <button class="btn-primary rounded-full w-2/3 h-18 md:h-24 text-xl md:text-3xl">チャレンジ履歴</button>
                 </a>
             </div> 
             <div class="w-full text-center my-3">
                 <a href="/technical" class="hover-message" data-tooltip="クラブで練習するわざの一覧を表示します">
-                    <button class="btn-primary rounded-full w-1/2 h-18 md:h-24 text-xl md:text-3xl">わざ一覧</button>
+                    <button class="btn-primary rounded-full w-2/3 h-18 md:h-24 text-xl md:text-3xl">わざ一覧</button>
                 </a>
             </div>
 
             @guest
             <div class="w-full text-center my-3">
                 <a href="/login" class="hover-message" data-tooltip="ログインします">
-
-                    <button class="btn-primary rounded-full w-1/2 h-18 md:h-24 text-xl md:text-3xl">ログイン</button>
+                    <button class="btn-primary rounded-full w-2/3 h-18 md:h-24 text-xl md:text-3xl">ログイン</button>
                 </a>
             </div>
             @endguest

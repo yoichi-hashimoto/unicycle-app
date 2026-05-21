@@ -2,21 +2,38 @@
 
 @section('content')
 <main class="pt-28">
+
 <h1 class="text-center m-8">レベルアップチェック</h1>
+    @if(session('message'))
+    <div class="m-auto bg-green-100 text-lg w-1/3 text-center">
+        {{ session('message')}}
+    </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="text-red-500 text-center m-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 <form action="{{route('practiceJadge.store')}}" method="POST">
     @csrf
 <div class="w-3/4 m-auto grid grid-cols-2 items-center text-sm md:text-lg text-center gap-4 md:gap-12">
     <div class="">
         <img src="" id="memberImage" alt="メンバーを選択してください" class="w-32 md:w-48 h-24 md:h-40 text-center m-auto object-cover">
-    <select name="members" id="selectedMember" value="メンバー" class="my-4 md:my-8 text-md md:text-xl">
+    <select name="user_id" id="selectedMember" value="メンバー" class="my-4 md:my-8 text-md md:text-xl">
         <option value="choice name">メンバー選択</option>
         @foreach($users as $user)
-        <option name="user_id" value="{{ $user->id }}" data-image="{{ $user->avatar ? asset( $user->avatar->avatar_path ) : ''}}" data-level="{{ $user->histories->last()?->practice?->level ?? ''}}" data-challenge="{{ $user->histories->last()->practice?->name ?? ''}}" data-practice-id="{{ $user->histories->last()?->practice_id ?? 0 }}">{{$user->name}}</option>
+        <option name="user_id" value="{{ $user->id }}" data-image="{{ $user->avatar ? asset( $user->avatar->avatar_path ) : ''}}" data-level="{{ $user->histories->last()?->practice?->level ?? ''}}" data-challenge="{{ $user->histories->last()?->practice?->name ?? ''}}" data-practice-id="{{ $user->histories->last()?->practice_id ?? 0 }}">{{$user->name}}</option>
         @endforeach
     </select>
     </div>
     <input type="hidden" name="practice_id" id="practiceId" value="">
+
     <div class="w-[150px] h-[150px] md:w-[300px] md:h-[300px] m-auto">
         <div class="">
             <p class="my-2 text-xs md:text-lg">現在のレベル</p>
@@ -28,11 +45,20 @@
         </div>
     </div>
     <div class="m-auto flex flex-row  items-center w-full text-lg h-[150px]">
-        <button type="submit" id="clear-approve" class="btn-primary w-full h-16 md:text-3xl ">合格！</button>
+        <button type="submit" id="clear-approve" class="btn-primary w-full h-16 md:text-3xl ">合格✨</button>
     </div>
-            <a href="{{ route('admin.index') }}" class="text^center w-full h-16 md:text-3xl">
-        <button type="button" class="btn-outline w-full h-16 md:text-3xl">トップに戻る</button>
-        </a>
+</form>
+    
+    <form action="{{ route('practiceJadge.fail') }}" method="POST">
+        @csrf
+        <input type="hidden" name="practice_id" id="failPracticeId">
+        <input type="hidden" name="user_id" id="failUserId">
+        <button type="submit" class="btn-outline w-full h-16 md:text-3xl">不合格💦</button>
+    </form>
+<form action="{{route('practiceJadge.decrease')}}" method="POST">
+    @csrf
+    <input type="hidden" name="practice_id" id="decreasePracticeId" value="">
+        <input type="hidden" name="user_id" id="decreaseUserId" value="">
     <div class="items-top w-full h-[150px]">
         <button type="submit" id="failure-approve" class="btn-outline w-1/2 h-1/4 p-1">レベルを下げる</button>
     </div>
@@ -46,8 +72,12 @@
         const image = document.getElementById('memberImage');
         const level = document.getElementById('memberLevel');
         const challenge = document.getElementById('nextChallenge');
-
-        if(!select || !image || !level || !challenge)return;
+        const practiceIdInput = document.getElementById('practiceId');
+        const decreasePracticeId = document.getElementById('decreasePracticeId');
+        const decreaseUserId = document.getElementById('decreaseUserId');
+        const failPracticeId = document.getElementById('failPracticeId');
+        const failUserId = document.getElementById('failUserId');
+        if(!select || !image || !level || !challenge || !decreasePracticeId || !decreaseUserId || !failPracticeId || !failUserId )return;
 
         function updateMemberInfo(){
             const selectedOption = select.options[select.selectedIndex];
@@ -65,7 +95,12 @@
 
             level.textContent = memberLevel;
             challenge.textContent = memberChallenge;
+
             document.getElementById('practiceId').value = practiceId;
+            document.getElementById('decreasePracticeId').value = practiceId;
+            document.getElementById('decreaseUserId').value = selectedOption.value;
+            document.getElementById('failPracticeId').value=practiceId;
+            document.getElementById('failUserId').value=selectedOption.value;
             }
             select.addEventListener('change',updateMemberInfo);
 

@@ -52,6 +52,16 @@ class User extends Authenticatable
         return $this -> hasMany(History::class);
     }
 
+    public function practices(){
+        return $this->belongsToMany(Practice::class,'histories')
+        ->withPivot('is_passed')
+        ->withTimestamps();
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
+
     public function getCurrentLevelAttribute(){
         $history = $this->histories()
         ->whereHas('practice')
@@ -70,5 +80,11 @@ class User extends Authenticatable
         return Animal::where('min_level','<=',$current_level)
         ->where('max_level','>=',$current_level)
         ->first();
+    }
+
+    public function getReceivedLikesCountAttribute(){
+        return Like::whereHas('history', function($query) {
+            $query->where('user_id', $this->id);
+        })->count();
     }
 }

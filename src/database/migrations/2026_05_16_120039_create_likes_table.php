@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHistoriesTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('histories', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('practice_id')->constrained('practices')->onDelete('cascade');
-            $table->boolean('is_passed')->default(false)->comment('合否(合格:true, チャレンジ:false)'); // 0 for failure, 1 for success
+            $table->foreignId('history_id')->constrained('histories')->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['user_id', 'history_id']);
         });
     }
 
@@ -29,6 +30,6 @@ class CreateHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('histories');
+        Schema::dropIfExists('likes');
     }
 }

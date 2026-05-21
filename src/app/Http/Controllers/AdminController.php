@@ -10,6 +10,7 @@ use App\Models\Practice;
 use App\Models\History;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\HistoryRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +47,14 @@ class AdminController extends Controller
         'password' => Hash::make($validated['password']),
         'member_avatar_id' => $validated['member_avatar_id']
     ]);
+
+    $userLevel = 1;
+    History::create([
+        'user_id' => $userData->id,
+        'practice_id' => $userLevel,
+        'is_passed' => 1,
+    ]);
+
     return redirect()->route('admin.index')->with('message','登録が完了しました。'); 
     }
 
@@ -74,14 +83,15 @@ class AdminController extends Controller
     return view ('/admin.practiceJadge',compact('users'));
     }
 
-    public function storeHistory(Request $request){
+    public function storeHistory(HistoryRequest $request){
 
-        $userId = $request->input('members');
+        $userId = $request->input('user_id');
         $nextPractice = $request->input('practice_id') + 1;
 
         History::create([
             'user_id' => $userId,
             'practice_id' => $nextPractice,
+            'is_passed' => 1,
         ]);
         return redirect()->route('practiceJadge.show')->with('message','レベルが上がりました！');
 
@@ -89,4 +99,32 @@ class AdminController extends Controller
     
     // 2.memberのレベルダウン（decrease）を念のため準備ボタンを押すと-1されてupdateしhistoriesに保存される
 
+
+    public function decreaseHistory(HistoryRequest $request){
+        $validated = $request->validated();
+        $userId = $validated['user_id'];
+        $currentPractice = $validated['practice_id'];
+        $previousPractice = max($currentPractice - 1, 1);
+
+        History::create([
+            'user_id' => $userId,
+            'practice_id' => $previousPractice,
+            'is_passed' => 0,
+        ]);
+        return redirect()->route('practiceJadge.show')->with('message','レベルが下がりました。');
+    }
+
+    // 3.不合格の場合はhistoryにデータだけが残り、チャレンジ履歴に表示できるようになる。
+
+    public function failChallenge(HistoryRequest $request){
+        $validated = $request->validated();
+        $userId = $validated['user_id'];
+        $practiceId = $validated['practice_id'];
+        History::create([
+            'user_id' => $userId,
+            'practice_id' => $practiceId,
+            'is_passed' =>0,
+        ]);
+        return redirect()->back()->with('message','残念！またチャレンジしよう！');
+    }
 }

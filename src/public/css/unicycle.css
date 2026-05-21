@@ -35,9 +35,19 @@ h1 {
     width: 6rem;
     border-radius: 0.5rem;
     padding: 0.5rem;
-    background-color: rgba(194, 237, 194, 0.516);
+    background-color: rgba(218, 237, 194, 0.516);
     margin-top: 1rem;
 }
+
+.auth-user-container{
+    background-color: rgb(215, 237, 222);
+    border:2px solid rgb(10, 191, 70);
+    padding:1rem 0.5rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    position:relative;
+}
+
 
 .member-name {
     text-align: center;
@@ -45,7 +55,7 @@ h1 {
 }
 
 .level-text {
-    font-size: 4px;
+    font-size: 8px;
 }
 
 .level-int {
@@ -117,6 +127,11 @@ body {
         padding: 1rem;
     }
 
+    .auth-user-container{
+        position:relative;
+    }
+
+
     .animal-container {
         width: 12rem;
         padding: 1rem;
@@ -148,16 +163,18 @@ body {
 .hover-message {
     position: relative;
     cursor: pointer;
+    font-size: 12px;
 }
 
 .hover-message:hover::after {
     content: attr(data-tooltip); /* 属性値からメッセージを取得 */
     position: absolute;
-    bottom: 50%;
-    left: 80%;
+    width: 140px;
+    bottom: 100%;
+    left: 100%;
     transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
+    background-color:rgb(213, 248, 175);
+    color:black;
     padding: 5px;
     border-radius: 4px;
     z-index: 10;
@@ -188,15 +205,18 @@ body {
     font-size: 8px;
     position:absolute;
     border-radius: 10rem;
-    padding:2px 4px 2px 4px;
+    padding:2px 4px;
     color: white;
     background-color: rgb(73, 177, 17);
     right: -5%;
     top: -5%;
-    display: inline-block; /* 必須 */
-     animation: shake 0.6s infinite; /* 0.3秒で無限ループ */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    animation: shake 0.6s infinite; /* 0.3秒で無限ループ */
 
 }
+
 
 @keyframes shake {
   0% { transform: translate(0, 0) rotate(0deg); }
@@ -205,3 +225,13 @@ body {
   75% { transform: translate(-1px, -1px) rotate(-2deg); }
   100% { transform: translate(0, 0) rotate(0deg); }
 }
+
+.pagination .page-item .page-link {
+    color: black;
+    background-color: white;
+    border: 1px solid rgb(44, 224, 44);
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.25rem;
+    border-radius: 0.25rem;
+}
+
