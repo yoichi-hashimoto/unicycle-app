@@ -3,7 +3,7 @@
 @section('content')
 <main class="pt-20"> 
 
-<div class="w-96 my-12 m-auto text-center">
+<div class="w-80 md:w-1/2 my-12 m-auto text-center">
     
 <h1 class="text-3xl">プロフィール変更画面</h1>
 @if($errors->any())

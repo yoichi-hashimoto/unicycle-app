@@ -22,7 +22,7 @@
             $isCleared = auth()->check() && !is_null($current_level) && $skill->level <= $current_level - 1;
         @endphp
 
-        <div class="flex flex-col grid-item w-24 h-24 p-2 md:p-4 rounded-lg m-auto md:w-32 md:h-32 lg:w-48 lg:h-48 relative
+        <div class="flex flex-col grid-item w-24 h-24 p-2 md:p-4 rounded-lg m-auto md:w-32 md:h-32 lg:w-48 lg:h-48 relative shadow-md
             {{ $isCleared ? 'bg-gray-200' : 'bg-green-100' }}">
 
             <div class="{{ $isCleared ? 'bg-gray-300' : 'bg-white' }} rounded-full w-5 h-5 p-0.5 md:w-8 md:h-8 lg:w-12 lg:h-12 md:p-1 absolute left-1 md:left-2 top-1 md:top-2 flex flex-col items-center justify-center">
@@ -45,7 +45,7 @@
 
             <div class="{{ $isCleared ? 'bg-green-300' : 'bg-green-600' }} border-2 border-white text-[8px] lg:text-[20px] p-0.5 w-12 md:w-16 text-center rounded-full mx-auto absolute right-1 md:right-2 bottom-1 md:bottom-2 flex items-center">
                 <button 
-                    class="openModal text-white text-[8px] lg:text-[12px] w-full p-0.5 rounded-lg"
+                    class="openModal text-white text-[8px] lg:text-[12px] w-full p-0.5 rounded-lg shadow-md"
                     data-name="{{ $skill->name }}"
                     data-description="{{ $skill->description }}">
                     せつめい
