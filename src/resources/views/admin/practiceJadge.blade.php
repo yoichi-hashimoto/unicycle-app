@@ -60,7 +60,7 @@
     <input type="hidden" name="practice_id" id="decreasePracticeId" value="">
         <input type="hidden" name="user_id" id="decreaseUserId" value="">
     <div class="items-top w-full h-[150px]">
-        <button type="submit" id="failure-approve" class="btn-outline w-1/2 h-1/4 p-1">レベルを下げる</button>
+        <button type="submit" id="failure-approve" class="btn-outline md:w-1/2 p-1">レベルを下げる</button>
     </div>
 </div>
 </form>

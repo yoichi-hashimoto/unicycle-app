@@ -20,7 +20,7 @@
                 <p>パスワード</p>
                 <input name="password" type="password" class="h-10 border border-black w-full rounded-full mb-16 p-6">
                 <div class="text-center">
-                    <button type="submit" class="btn-primary rounded-full w-1/2 h-6 md:h-12 text-md md:text-xl">ログイン</button>
+                    <button type="submit" class="btn-primary rounded-full w-1/2 md:h-12 text-md md:text-xl">ログイン</button>
                 </div>
             </div>
         </form>

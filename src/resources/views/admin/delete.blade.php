@@ -3,8 +3,8 @@
 @section('content')
 <main class="pt-28">
 <h1 class="text-center m-8 font-bold">メンバー削除画面</h1>
-<table class="ranking-table">
-    <tr class="">
+<table class="ranking-table m-auto text-center border-collapse">
+    <tr class="w-full">
         <th class="table-title" colspan="3">なまえ</th>
         <th class="table-title">レベル</th>
         <th class="table-title">動物</th>
@@ -13,8 +13,8 @@
     <tr>
         <form action="{{ route('delete',['id'=>$user->id])}}" method="POST" class="deleteForm">
             @csrf
-        <td class="bg-green-50 text-center p-3 text-md md:text-2xl">
-            <button class="btn-outline" type="submit">削除する</button>
+        <td class="bg-green-50 text-center p-3 md:text-2xl">
+            <button class="btn-outline text-xs" type="submit">削除する</button>
         </td>
         </form>
         <td class="bg-green-50 text-center p-3 text-md md:text-2xl">{{ $user->name}}</td>
